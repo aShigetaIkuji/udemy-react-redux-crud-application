@@ -1,14 +1,13 @@
-import {INCREMENT, DECREMENT} from '../actions'
+import _ from 'lodash'
+import {READ_EVENTS} from '../actions'
 
-const initialState = {value: 0}
-
-export default (state = initialState, action) => {
+export default (events = {}, action) => {
     switch (action.type) {
-        case INCREMENT:
-            return {value: state.value + 1}
-        case DECREMENT:
-            return {value: state.value - 1}
+        case READ_EVENTS:
+            console.log("trace:reducers/event.js")
+            console.log(_.mapKeys(action.response.data, 'id'))
+            return _.mapKeys(action.response.data, 'id')
         default:
-            return state
+            return events
     }
 }
